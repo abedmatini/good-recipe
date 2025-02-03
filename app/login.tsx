@@ -8,11 +8,17 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { Link } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import Animated, { FadeIn, FadeInUp, FadeOut } from "react-native-reanimated";
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeInUp,
+  FadeOut,
+} from "react-native-reanimated";
 
 export default function LoginScreen() {
+  const navigation = useNavigation();
   return (
     <View className="bg-white h-full w-full">
       <ExpoStatusBar style="light" />
@@ -28,7 +34,8 @@ export default function LoginScreen() {
           className="h-[225] w-[90]"
           source={require("../assets/images/light.png")}
         />
-        <Image
+        <Animated.Image
+          entering={FadeInUp.delay(400).duration(1000).springify()}
           className="h-[160] w-[65]"
           source={require("../assets/images/light.png")}
         />
@@ -38,35 +45,50 @@ export default function LoginScreen() {
       <View className="h-full w-full flex justify-around pt-40 pb-10">
         {/* Title */}
         <View className="flex items-center mx-4 space-y-4">
-          <Text className="text-white font-bold tracking-wider text-5xl">
+          <Animated.Text
+            entering={FadeInUp.duration(1000).springify()}
+            className="text-white font-bold tracking-wider text-5xl"
+          >
             Login
-          </Text>
+          </Animated.Text>
         </View>
         {/* Form */}
         <View className="flex items-center mx-4 space-y-4">
-          <View className="bg-black/5 p-5 rounded-2xl w-full">
+          <Animated.View
+            entering={FadeInDown.duration(1000).springify()}
+            className="bg-black/5 p-5 rounded-2xl w-full"
+          >
             <TextInput placeholder="Email" placeholderTextColor={"gray"} />
-          </View>
-          <View className="bg-black/5 p-5 rounded-2xl w-full my-3">
+          </Animated.View>
+          <Animated.View
+            entering={FadeInDown.delay(200).duration(1000).springify()}
+            className="bg-black/5 p-5 rounded-2xl w-full my-3"
+          >
             <TextInput
               placeholder="Password"
               placeholderTextColor={"gray"}
               secureTextEntry
             />
-          </View>
-          <View className="w-full">
+          </Animated.View>
+          <Animated.View
+            entering={FadeInDown.delay(400).duration(1000).springify()}
+            className="w-full"
+          >
             <TouchableOpacity className="w-full bg-sky-400 p-3 rounded-2xl mb-3">
               <Text className="text-xl font-bold text-white text-center">
                 Login
               </Text>
             </TouchableOpacity>
-          </View>
-          <View className="flex-row justify-center">
+          </Animated.View>
+          <Animated.View
+            entering={FadeInDown.delay(600).duration(1000).springify()}
+            className="flex-row justify-center"
+          >
             <Text>Don't have an account?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("signup")}>
               <Text className="text-sky-600">Sign up</Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
         </View>
       </View>
     </View>
