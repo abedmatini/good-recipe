@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import Animated, { FadeIn, FadeInUp, FadeOut } from "react-native-reanimated";
 
 export default function LoginScreen() {
   return (
@@ -22,7 +23,8 @@ export default function LoginScreen() {
 
       {/* lights */}
       <View className="flex-row justify-around w-full absolute">
-        <Image
+        <Animated.Image
+          entering={FadeInUp.delay(200).duration(1000).springify()}
           className="h-[225] w-[90]"
           source={require("../assets/images/light.png")}
         />
